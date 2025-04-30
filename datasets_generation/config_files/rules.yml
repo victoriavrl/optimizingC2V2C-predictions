@@ -1,0 +1,29 @@
+{'user_defined':{'weekday':
+                {'n_trip_out': [1],
+                    'last_trip_to':{'home': True},
+                    'overall_min_time_at':{'home': 9},
+                    'min_state_duration':{'home': 0.25,'errands': 0.25,'escort': 0.25,'shopping': 0.25,'leisure': 0.25, 'workplace':3.0},
+                },
+            'weekend':
+                {'n_trip_out': [1],
+                    'last_trip_to':{'home': True},
+                    'overall_min_time_at':{'home': 6},
+                    'min_state_duration':{'home': 0.25,'errands': 0.25, 'escort': 0.25,'shopping': 0.25,'leisure': 0.25},
+                }
+            },
+            'commuter':{'weekday':
+                {'n_trip_out': [1],
+                    'last_trip_to':{'home': True},
+                    'overall_min_time_at':{'home': 9,'workplace':6},
+                    'at_least_one_trip': {'home': False},
+                    'min_state_duration':{'home': 0.25,'errands': 0.25,'escort': 0.25,'shopping': 0.25,'leisure': 0.25, 'workplace':6.0},
+                },
+            'weekend':
+                {'n_trip_out': [4],
+                    'last_trip_to':{'home': True},
+                    'overall_min_time_at':{'home': 6},
+                    'min_state_duration':{'home': 0.25,'errands': 1.0, 'escort': 0.25,'shopping': 1.5,'leisure': 0.3},
+                }
+            } 
+}
+
