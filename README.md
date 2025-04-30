@@ -74,7 +74,7 @@ First, you need to navigate to the `simulations` directory. You can do this by r
 cd simulations
 ```
 
-Then, you can run the simulations with the following command:
+Then, you can run the simulations with the following commands:
 
 ```bash
 
