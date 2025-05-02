@@ -1,6 +1,6 @@
 import os
 
-DATA_FOLDER = "data_ev/others"
+DATA_FOLDER = "data_ev/EV_1year"
 TRIPS_PATH = os.path.join(DATA_FOLDER, "trips_data")
 METRICS_PATH = "metrics"
 
