@@ -83,6 +83,7 @@ def handle_non_driving_state(ev, row):
     if ev.smart and not ev.oracle:
         plug_out_time_pred, energy_needed_pred, next_destination_pred = predict_ev_charging(
             ev.user_type, pd.to_datetime(row['datetime']), row['state'], ev.SoC)
+        plug_out_time_pred = min(plug_out_time_pred, pd.to_datetime("2023-12-31 23:45:00"))
         ev.smart_charging(row['state'], pd.to_datetime(row['datetime']), pd.to_datetime(plug_out_time_pred),
                           energy_needed_pred, next_destination_pred)
     elif ev.smart and ev.oracle:

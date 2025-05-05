@@ -1,5 +1,5 @@
-import matplotlib
-matplotlib.use('TkAgg')
+import matplotlib as mpl
+mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -8,6 +8,12 @@ from sklearn.cluster import KMeans
 from sklearn_extra.cluster import KMedoids
 from sklearn.metrics import pairwise_distances, calinski_harabasz_score, davies_bouldin_score
 from scipy.cluster.hierarchy import fcluster, linkage
+import seaborn as sns
+
+mpl.rcParams.update({'font.size': 16})
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = ['Charter', 'XCharter', 'Georgia', 'Times New Roman']
+mpl.rcParams['mathtext.fontset'] = 'stix'
 
 df = pd.read_csv("data/combined_charging_sessions_clustered.csv", parse_dates=['plug_in_datetime', 'plug_out_datetime'])
 
@@ -177,18 +183,29 @@ total_votes[total_votes == 0] = 1
 percentages = (votes_df.T / total_votes).T * 100
 
 # Plot
-percentages.plot(kind='bar', stacked=False, colormap='Set2', width=0.8)
+palette = [
+    "#e05263", "#659157", "#69a2b0", "#b4b6b1"
+]
+
+sns.set_palette(palette)
+percentages.plot(kind='bar', stacked=False, color=palette, width=0.8)
 
 # Labels and formatting
-plt.xlabel('k (Number of Clusters)', fontsize=12)
-plt.ylabel('Percentage of Votes (%)', fontsize=12)
-plt.xticks(rotation=0, fontsize=10)
-plt.yticks(fontsize=10)
+plt.xlabel('k (Number of Clusters)')
+plt.ylabel('Percentage of Votes (%)')
+plt.xticks(rotation=0)
+
 
 # Legend
-plt.legend(title="Clustering Method", loc='upper left', fontsize=10)
+plt.legend(
+    title="Clustering Method",
+    loc='upper center',
+    bbox_to_anchor=(0.5, -0.15),
+    ncol=4,  # Adjust to the number of legend items
+    frameon=False
+)
 
-plt.savefig("figures/votes_portfolios.pdf")
+plt.savefig("figures/votes_portfolios.pdf", bbox_inches='tight')
 
 method_votes = votes["KMeans"]
 best_k = max(method_votes, key=method_votes.get)
@@ -198,5 +215,4 @@ portfolio['cluster'] = kmeans.fit_predict(scaled_data)
 df = df.merge(portfolio[['user_id', 'cluster']], on='user_id', how='left')
 
 df = df.rename(columns={'cluster': 'user_cluster'})
-df.drop(columns=['Unnamed: 0'], inplace=True)
-df.to_csv("data/cluster2GM_final.csv")
+df.to_csv("data/cluster2GM_final_15.csv")

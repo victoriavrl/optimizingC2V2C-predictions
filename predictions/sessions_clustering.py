@@ -1,6 +1,5 @@
-import matplotlib
-
-matplotlib.use('TkAgg')
+import matplotlib as mpl
+mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
@@ -8,6 +7,11 @@ from kneed import KneeLocator
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import adjusted_rand_score
 import seaborn as sns
+
+mpl.rcParams.update({'font.size': 16})
+mpl.rcParams['font.family'] = 'serif'
+mpl.rcParams['font.serif'] = ['Charter', 'XCharter', 'Georgia', 'Times New Roman']
+mpl.rcParams['mathtext.fontset'] = 'stix'
 
 file_path = "data/combined_charging_sessions_prepro.csv"
 df = pd.read_csv(file_path, parse_dates=['plug_in_datetime', 'plug_out_datetime'])
@@ -121,9 +125,9 @@ for cluster in df["SessionCluster"].unique():
 
     for ax, var, title in zip(axes.flatten(), variables, titles):
         sns.histplot(cluster_data[var], bins=20, kde=True, ax=ax)
-        ax.set_title(f"{title} - Cluster {cluster}", fontsize=12)
-        ax.set_xlabel(var, fontsize=10)
-        ax.set_ylabel("Count", fontsize=10)
+        ax.set_title(f"{title} - Cluster {cluster}")
+        ax.set_xlabel(var)
+        ax.set_ylabel("Count")
 
     plt.tight_layout()
     plt.savefig(f"figures/session_cluster/cluster_{cluster}_distributions.pdf")

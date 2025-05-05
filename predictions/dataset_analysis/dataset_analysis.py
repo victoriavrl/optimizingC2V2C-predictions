@@ -189,7 +189,7 @@ def plot_long_connection_frequency_by_weekday(df: pd.DataFrame):
 
     # Plot
     plt.figure(figsize=(8, 5))
-    weekday_counts.plot(kind='bar', color="#69A2B0", edgecolor='black')
+    weekday_counts.plot(kind='bar', color="#69A2B0")
     plt.xlabel("Day of Week")
     plt.ylabel("Frequency of Connections > 24h")
     plt.tight_layout()
